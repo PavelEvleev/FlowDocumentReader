@@ -59,7 +59,7 @@ namespace FlowDocumentsReader
                     FlowDocument doc = new FlowDocument(content);
                     Viewer.Document = doc;
                 }
-                catch(XamlParseException excep)
+                catch(XamlParseException ex)
                 {
                     selected.Valid = false;
                 }
