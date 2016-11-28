@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlowDocumentsReader
 {
@@ -52,6 +41,7 @@ namespace FlowDocumentsReader
         {
             XamlFile selected = ListViewDocuments.SelectedItem as XamlFile;
             
+            if(selected.Valid!=false)
             using (FileStream file = new FileStream(selected.PathFile, FileMode.Open, FileAccess.Read))
             {
                 try {
