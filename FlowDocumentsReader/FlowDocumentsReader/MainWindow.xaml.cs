@@ -40,21 +40,27 @@ namespace FlowDocumentsReader
         private void ListViewDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             XamlFile selected = ListViewDocuments.SelectedItem as XamlFile;
-            
-            if(selected.Valid!=false)
-            using (FileStream file = new FileStream(selected.PathFile, FileMode.Open, FileAccess.Read))
+
+            if (selected.Valid != false)
             {
-                try {
-                    Section content = XamlReader.Load(file) as Section;
-                    FlowDocument doc = new FlowDocument(content);
-                    Viewer.Document = doc;
-                }
-                catch(XamlParseException ex)
+                Viewer.Visibility = Visibility.Visible;
+                using (FileStream file = new FileStream(selected.PathFile, FileMode.Open, FileAccess.Read))
                 {
-                    selected.Valid = false;
+                    try
+                    {
+                        Section content = XamlReader.Load(file) as Section;
+                        FlowDocument doc = new FlowDocument(content);
+                        Viewer.Document = doc;
+                    }
+                    catch (XamlParseException ex)
+                    {
+                        selected.Valid = false;
+                        Viewer.Visibility = Visibility.Hidden;
+                    }
+
                 }
-                
             }
+            else { Viewer.Visibility = Visibility.Hidden; }
 
         }
     }
